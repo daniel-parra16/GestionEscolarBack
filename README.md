@@ -1,2 +1,2 @@
-# Proyecto-Panaderia
-Realizar un proyecto de un manejo de inventario usando Laravel y React
+# Proyecto-Cognitio
+Realizar un proyecto de gestion escolar haciendo uso de Spring Boot y react
