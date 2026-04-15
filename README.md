@@ -17,3 +17,5 @@ Configura tu base de datos PostgreSQL y variables de entorno.
 
 ```bash
 mvn spring-boot:run
+# Proyecto-Cognitio
+Realizar un proyecto de gestion escolar haciendo uso de Spring Boot y react
