@@ -2,16 +2,22 @@ package com.cognitio.gestion.auth.service;
 
 import java.util.List;
 
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.cognitio.gestion.auth.dto.*;
+import com.cognitio.gestion.auth.dto.AuthResponse;
+import com.cognitio.gestion.auth.dto.LoginRequest;
+import com.cognitio.gestion.auth.dto.RefreshRequest;
+import com.cognitio.gestion.auth.dto.RegisterRequest;
 import com.cognitio.gestion.auth.mapper.AuthMapper;
-import com.cognitio.gestion.auth.model.*;
+import com.cognitio.gestion.auth.model.Rol;
+import com.cognitio.gestion.auth.model.UsuarioAuth;
+import com.cognitio.gestion.auth.model.UsuarioRol;
+import com.cognitio.gestion.auth.repository.RolRepository;
 import com.cognitio.gestion.auth.repository.UsuarioAuthRepository;
 import com.cognitio.gestion.auth.repository.UsuarioRolRepository;
-import com.cognitio.gestion.auth.repository.RolRepository;
 import com.cognitio.gestion.auth.security.JwtService;
 import com.cognitio.gestion.usuario.model.Usuario;
 import com.cognitio.gestion.usuario.repository.UsuarioRepository;
@@ -57,11 +63,13 @@ public class AuthService {
 
         // 1. usuario
         Usuario usuario = mapper.toUsuario(request);
+        usuario.setActivo(true);
         usuarioRepo.save(usuario);
 
         // 2. auth
         UsuarioAuth auth = mapper.toUsuarioAuth(request);
         auth.setPassword(encoder.encode(request.getPassword()));
+        usuario.setActivo(true);
         auth.setUsuario(usuario);
 
         authRepo.save(auth);
